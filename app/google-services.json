@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1091184258958",
+    "firebase_url": "https://eatbasta.firebaseio.com",
+    "project_id": "eatbasta",
+    "storage_bucket": "eatbasta.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1091184258958:android:2058e6727af91b51",
+        "android_client_info": {
+          "package_name": "com.iacovelli.nicola.eatbasta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1091184258958-019ntrq6n5vvncl9gpimrj98u4porvjb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iacovelli.nicola.eatbasta",
+            "certificate_hash": "dba65af2e3cc8d5ee334989a71606b8b5b9bc7f4"
+          }
+        },
+        {
+          "client_id": "1091184258958-6qcc0b61e41lmk5jv86a1139bnaml7en.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlDFUZuYfMnolz13mm04MrhfUvdo1bdLk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1091184258958-6qcc0b61e41lmk5jv86a1139bnaml7en.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

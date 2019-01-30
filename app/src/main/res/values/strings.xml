@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Eat&amp;Basta</string>
+    <string name="logo">Logo</string>
+    <string name="login"><b>Login</b></string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="password_smarrita">Password smarrita?</string>
+    <string name="new_register">Registrati</string>
+    <string name="registrati"><b>Registrati</b></string>
+    <string name="email">Email</string>
+    <string name="verify_password">Reinserisci password</string>
+    <string name="birthday">Data di nascita</string>
+    <string name="tot"><b>Tot: </b></string>
+    <string name="ordina">Ordina</string>
+    <string name="logout">Logout</string>
+</resources>
