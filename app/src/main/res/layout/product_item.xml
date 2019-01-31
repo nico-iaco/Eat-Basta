@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:weightSum="5"
     android:layout_width="match_parent"
-    android:layout_height="50dp">
+    android:layout_height="70dp">
 
     <TextView
         android:id="@+id/product_name"
@@ -13,6 +13,7 @@
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/product_price"
+        android:text="@string/inital_quantity"
         android:layout_weight="1"
         android:layout_gravity="center"
         android:layout_width="0dp"
@@ -25,7 +26,7 @@
 
     <com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker
         android:id="@+id/product_quantity"
-        app:snp_maxValue="1000"
+        app:snp_maxValue="100"
         app:snp_minValue="0"
         app:snp_stepSize="1"
         app:snp_updateInterval="1"

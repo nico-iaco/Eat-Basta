@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker;
@@ -13,11 +12,15 @@ import com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker
 
 import java.util.ArrayList;
 
+
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     private ArrayList<Product> products;
+    View.OnClickListener clickListener;
 
-    public ProductAdapter(ArrayList<Product> products) {
+
+    public ProductAdapter(ArrayList<Product> products, View.OnClickListener clickListener) {
         this.products = products;
+        this.clickListener = clickListener;
     }
 
     @NonNull
@@ -47,7 +50,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         }
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements ScrollableNumberPickerListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements ScrollableNumberPickerListener {
         public final View view;
         public final TextView productName;
         public final TextView productPrice;
@@ -66,6 +69,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         @Override
         public void onNumberPicked(int value) {
             p.setProductQuantity(value);
+            clickListener.onClick(view);
         }
     }
 }

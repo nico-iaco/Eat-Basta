@@ -15,4 +15,5 @@
     <string name="logout">Logout</string>
     <string name="phone_number">Phone number</string>
     <string name="dark_mode">Dark mode</string>
+    <string name="inital_quantity">0.0</string>
 </resources>
