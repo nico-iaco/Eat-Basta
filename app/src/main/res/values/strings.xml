@@ -13,4 +13,6 @@
     <string name="tot"><b>Tot: </b></string>
     <string name="ordina">Ordina</string>
     <string name="logout">Logout</string>
+    <string name="phone_number">Phone number</string>
+    <string name="dark_mode">Dark mode</string>
 </resources>

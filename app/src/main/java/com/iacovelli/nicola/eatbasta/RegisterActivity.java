@@ -1,13 +1,12 @@
 package com.iacovelli.nicola.eatbasta;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,17 +16,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-import java.util.regex.Pattern;
-
-public class RegisterActivity extends AppCompatActivity implements TextWatcher {
+public class RegisterActivity extends AppCompatActivity {
 
     EditText password;
     EditText verifyPassword;
     EditText email;
+    EditText phone;
     Button registerBtn;
     private FirebaseAuth mAuth;
+    boolean isEmail, isPassword, isPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +33,13 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
         setContentView(R.layout.activity_register);
         mAuth = FirebaseAuth.getInstance();
         password = findViewById(R.id.password_register);
-        password.addTextChangedListener(this);
+        password.addTextChangedListener(new ValidateTextWatcher(password));
         verifyPassword = findViewById(R.id.verify_password_register);
-        verifyPassword.addTextChangedListener(this);
+        verifyPassword.addTextChangedListener(new ValidateTextWatcher(verifyPassword));
         email = findViewById(R.id.email_register);
-        email.addTextChangedListener(this);
+        email.addTextChangedListener(new ValidateTextWatcher(email));
+        phone = findViewById(R.id.phone_register);
+        phone.addTextChangedListener(new ValidateTextWatcher(phone));
         registerBtn = findViewById(R.id.register_button_register);
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,10 +68,7 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
     }
 
     private void validate() {
-        String u = email.getText().toString();
-        String p = password.getText().toString();
-        String vP = verifyPassword.getText().toString();
-        if (Pattern.matches(Patterns.EMAIL_ADDRESS.pattern(), u) && p.length()>0 && p.equals(vP) ){
+        if (isEmail && isPassword && isPhone) {
             if (!registerBtn.isEnabled()){
                 registerBtn.setEnabled(true);
             }
@@ -82,18 +79,58 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
         }
     }
 
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+    private void checkEmail() {
+        String u = email.getText().toString();
+        isEmail = Utility.checkEmail(u);
     }
 
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+    private void checkPassword() {
+        String p = password.getText().toString();
+        String vP = verifyPassword.getText().toString();
+        isPassword = Utility.checkPassword(p, vP);
     }
 
-    @Override
-    public void afterTextChanged(Editable s) {
-        validate();
+    private void checkPhone() {
+        String ph = phone.getText().toString();
+        isPhone = Utility.checkPhone(ph);
     }
+
+
+    class ValidateTextWatcher implements TextWatcher {
+
+        View v;
+
+        ValidateTextWatcher(View v) {
+            this.v = v;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            switch (v.getId()) {
+                case R.id.email_register:
+                    checkEmail();
+                    break;
+                case R.id.password_register:
+                case R.id.verify_password_register:
+                    checkPassword();
+                    break;
+                case R.id.phone_register:
+                    checkPhone();
+                    break;
+            }
+            validate();
+        }
+    }
+
+
 }

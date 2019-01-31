@@ -1,17 +1,19 @@
 package com.iacovelli.nicola.eatbasta;
 
-import android.app.Application;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,8 +24,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.regex.Pattern;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText user;
@@ -31,60 +31,77 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button loginBtn;
     TextView recoveryPwdTxt;
     TextView registerTxtBtn;
+    Switch darkSwitch;
+    LinearLayoutCompat mainLayout;
+    boolean isEmail, isPassword;
     private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mainLayout = findViewById(R.id.main_layout);
         FirebaseApp.initializeApp(this);
         mAuth = FirebaseAuth.getInstance();
         user = findViewById(R.id.user_login);
-        user.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                validate();
-            }
-        });
+        user.addTextChangedListener(new LoginTextWatcher(user));
         pwd = findViewById(R.id.password_login);
-        pwd.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                validate();
-            }
-        });
+        pwd.addTextChangedListener(new LoginTextWatcher(pwd));
         loginBtn = findViewById(R.id.login_button);
         loginBtn.setOnClickListener(this);
         recoveryPwdTxt = findViewById(R.id.password_recovery);
         recoveryPwdTxt.setOnClickListener(this);
         registerTxtBtn = findViewById(R.id.register_button);
         registerTxtBtn.setOnClickListener(this);
+        darkSwitch = findViewById(R.id.dark_switch);
+        darkSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mainLayout.setBackgroundColor(Color.BLACK);
+                } else {
+                    mainLayout.setBackgroundColor(Color.WHITE);
+                }
+            }
+        });
+    }
+
+    class LoginTextWatcher implements TextWatcher {
+
+        View v;
+
+        LoginTextWatcher(View v) {
+            this.v = v;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            switch (v.getId()) {
+                case R.id.user_login:
+                    String u = user.getText().toString();
+                    isEmail = Utility.checkEmail(u);
+                    break;
+                case R.id.password_login:
+                    String p = pwd.getText().toString();
+                    isPassword = Utility.checkPassword(p);
+                    break;
+            }
+            validate();
+        }
     }
 
     private void validate() {
-        String u = user.getText().toString();
-        String p = pwd.getText().toString();
-        if (Pattern.matches(Patterns.EMAIL_ADDRESS.pattern(), u) && p.length()>0){
+        if (isEmail && isPassword) {
             if (!loginBtn.isEnabled()){
                 loginBtn.setEnabled(true);
             }
