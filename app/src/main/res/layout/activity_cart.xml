@@ -5,10 +5,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="10dp"
     tools:context=".activity.CartActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/product_list"
+        android:paddingStart="5dp"
         android:layout_weight="13"
         android:layout_width="match_parent"
         android:layout_height="0dp" />

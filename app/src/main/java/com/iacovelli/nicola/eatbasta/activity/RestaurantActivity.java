@@ -1,10 +1,12 @@
 package com.iacovelli.nicola.eatbasta.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.iacovelli.nicola.eatbasta.R;
 import com.iacovelli.nicola.eatbasta.adapter.RestaurantAdapter;
@@ -28,7 +30,13 @@ public class RestaurantActivity extends AppCompatActivity {
                 new Restaurant("Panucci's pizza", "The best pizza ever", R.drawable.logo),
                 new Restaurant("Panucci's pizza", "The best pizza ever", R.drawable.logo)
         ));
-        restaurantList.setAdapter(new RestaurantAdapter(restaurantArrayList));
+        restaurantList.setAdapter(new RestaurantAdapter(restaurantArrayList, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(RestaurantActivity.this, CartActivity.class);
+                startActivity(i);
+            }
+        }));
         restaurantList.addItemDecoration(new DividerItemDecoration(restaurantList.getContext(), DividerItemDecoration.VERTICAL));
         restaurantList.setLayoutManager(new LinearLayoutManager(this));
     }

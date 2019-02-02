@@ -16,9 +16,11 @@ import java.util.ArrayList;
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder> {
 
     ArrayList<Restaurant> restaurantList;
+    View.OnClickListener clickListener;
 
-    public RestaurantAdapter(ArrayList<Restaurant> restaurantList) {
+    public RestaurantAdapter(ArrayList<Restaurant> restaurantList, View.OnClickListener listener) {
         this.restaurantList = restaurantList;
+        this.clickListener = listener;
     }
 
     @NonNull
@@ -48,6 +50,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         public RestaurantViewHolder(@NonNull View itemView) {
             super(itemView);
             this.v = itemView;
+            v.setOnClickListener(clickListener);
             restaurantImage = v.findViewById(R.id.restaurant_image);
             restaurantName = v.findViewById(R.id.restaurant_name);
             restaurantDescription = v.findViewById(R.id.restaurant_description);
