@@ -20,6 +20,7 @@ import com.iacovelli.nicola.eatbasta.R;
 import com.iacovelli.nicola.eatbasta.adapter.ProductAdapter;
 import com.iacovelli.nicola.eatbasta.model.Product;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -43,7 +44,6 @@ public class CartActivity extends AppCompatActivity {
         ProductAdapter productAdapter = new ProductAdapter(productList, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("OnClick", "Toccato");
                 checkProducts();
             }
         });
@@ -73,26 +73,19 @@ public class CartActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-/*
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.product_list:
-                checkProducts();
-                break;
-            default:
-                Log.d(getLocalClassName(), "Default");
-        }
-    }*/
 
 
     private void checkProducts() {
-        float total = 0;
+        double total = 0;
         int countProducts = 0;
         for (Product p : productList) {
             total += (p.getProductPrice() * p.getProductQuantity());
             countProducts += p.getProductQuantity();
         }
-        totalTxt.setText(String.valueOf(total));
+        DecimalFormat df = new DecimalFormat("###.##");
+        String totalString = df.format(total);
+        Log.d("Total price", totalString);
+        totalTxt.setText(totalString);
         if (countProducts >= 8 && !checkoutBtn.isEnabled()) {
             checkoutBtn.setEnabled(true);
         } else if (countProducts < 8 && checkoutBtn.isEnabled()) {
