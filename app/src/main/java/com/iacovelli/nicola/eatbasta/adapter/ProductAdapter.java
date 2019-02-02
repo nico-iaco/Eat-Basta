@@ -1,4 +1,4 @@
-package com.iacovelli.nicola.eatbasta;
+package com.iacovelli.nicola.eatbasta.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -7,15 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.iacovelli.nicola.eatbasta.R;
+import com.iacovelli.nicola.eatbasta.model.Product;
 import com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker;
 import com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPickerListener;
 
 import java.util.ArrayList;
 
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
     private ArrayList<Product> products;
-    View.OnClickListener clickListener;
+    private View.OnClickListener clickListener;
 
 
     public ProductAdapter(ArrayList<Product> products, View.OnClickListener clickListener) {
@@ -25,18 +27,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.product_item, viewGroup, false);
-        return new ViewHolder(v);
+        return new ProductViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ProductViewHolder viewHolder, int i) {
         Product p = products.get(i);
-        viewHolder.p = p;
-        viewHolder.productName.setText(p.getProductName());
-        viewHolder.productPrice.setText(String.valueOf(p.getProductPrice()));
-        viewHolder.productQuantity.setValue(p.getProductQuantity());
+        viewHolder.bind(p);
     }
 
 
@@ -50,20 +49,27 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements ScrollableNumberPickerListener {
-        public final View view;
-        public final TextView productName;
-        public final TextView productPrice;
-        public final ScrollableNumberPicker productQuantity;
-        public Product p;
+    public class ProductViewHolder extends RecyclerView.ViewHolder implements ScrollableNumberPickerListener {
+        private final View view;
+        private final TextView productName;
+        private final TextView productPrice;
+        private final ScrollableNumberPicker productQuantity;
+        private Product p;
 
-        public ViewHolder(View view) {
+        public ProductViewHolder(View view) {
             super(view);
             this.view = view;
             productName = view.findViewById(R.id.product_name);
             productPrice = view.findViewById(R.id.product_price);
             productQuantity = view.findViewById(R.id.product_quantity);
             productQuantity.setListener(this);
+        }
+
+        public void bind(Product p) {
+            this.p = p;
+            productName.setText(p.getProductName());
+            productPrice.setText(String.valueOf(p.getProductPrice()));
+            productQuantity.setValue(p.getProductQuantity());
         }
 
         @Override

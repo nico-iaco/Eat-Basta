@@ -1,4 +1,4 @@
-package com.iacovelli.nicola.eatbasta;
+package com.iacovelli.nicola.eatbasta.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -23,6 +23,8 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.iacovelli.nicola.eatbasta.R;
+import com.iacovelli.nicola.eatbasta.Utility;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -153,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(this, "Stai provando a recuperare la password", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.register_button:
-                i = new Intent(this,RegisterActivity.class);
+                i = new Intent(this, RegisterActivity.class);
                 startActivity(i);
                 break;
             default:

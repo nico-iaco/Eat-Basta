@@ -1,11 +1,11 @@
-package com.iacovelli.nicola.eatbasta;
+package com.iacovelli.nicola.eatbasta.model;
 
 public class Product {
     private String productName;
     private float productPrice;
     private int productQuantity = 0;
 
-    Product (String productName, float productPrice) {
+    public Product(String productName, float productPrice) {
         this.productName = productName;
         this.productPrice = productPrice;
     }

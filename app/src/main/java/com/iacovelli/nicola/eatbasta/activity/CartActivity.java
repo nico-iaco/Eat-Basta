@@ -1,4 +1,4 @@
-package com.iacovelli.nicola.eatbasta;
+package com.iacovelli.nicola.eatbasta.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.iacovelli.nicola.eatbasta.R;
+import com.iacovelli.nicola.eatbasta.adapter.ProductAdapter;
+import com.iacovelli.nicola.eatbasta.model.Product;
 
 import java.util.ArrayList;
 import java.util.Arrays;
