@@ -1,6 +1,8 @@
 package com.iacovelli.nicola.eatbasta.activity;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -39,6 +41,9 @@ public class CartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
         recyclerView = findViewById(R.id.product_list);
         progress = findViewById(R.id.checkout_bar);
+        progress.setIndeterminate(false);
+        progress.setMax(8);
+        progress.setProgress(0);
         totalTxt = findViewById(R.id.total_text);
         checkoutBtn = findViewById(R.id.checkout_button);
         ProductAdapter productAdapter = new ProductAdapter(productList, new View.OnClickListener() {
@@ -75,6 +80,7 @@ public class CartActivity extends AppCompatActivity {
     }
 
 
+    @TargetApi(Build.VERSION_CODES.N)
     private void checkProducts() {
         double total = 0;
         int countProducts = 0;
@@ -82,6 +88,7 @@ public class CartActivity extends AppCompatActivity {
             total += (p.getProductPrice() * p.getProductQuantity());
             countProducts += p.getProductQuantity();
         }
+        progress.setProgress(countProducts, true);
         DecimalFormat df = new DecimalFormat("###.##");
         String totalString = df.format(total);
         Log.d("Total price", totalString);
