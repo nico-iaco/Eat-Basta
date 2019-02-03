@@ -1,6 +1,6 @@
 package com.iacovelli.nicola.eatbasta.model;
 
-import android.support.annotation.DrawableRes;
+import androidx.annotation.DrawableRes;
 
 public class Restaurant {
     private String name;

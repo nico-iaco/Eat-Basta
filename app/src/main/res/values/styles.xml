@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -9,8 +9,25 @@
         <item name="editTextColor">@color/textColorLight</item>
     </style>
 
-    <style name="AppThemeDark" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:editTextColor">@color/textColorDark</item>
+    <style name="AppThemeDark" parent="AppTheme">
+        <item name="android:background">#000000</item>
+        <item name="android:backgroundTint">#000000</item>
+        <item name="editTextColor">@color/textColorDark</item>
+        <item name="android:textColor">@color/textColorDark</item>
     </style>
+
+    <style name="PrimaryRoundedButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="cornerRadius">25dp</item>
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:backgroundTint">@color/colorAccent</item>
+    </style>
+
+    <style name="InputTextStyling" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusBottomEnd">10dp</item>
+        <item name="boxCornerRadiusTopStart">10dp</item>
+        <item name="boxCornerRadiusBottomStart">10dp</item>
+        <item name="boxCornerRadiusTopEnd">10dp</item>
+    </style>
+
 
 </resources>

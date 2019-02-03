@@ -1,24 +1,20 @@
 package com.iacovelli.nicola.eatbasta.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,10 +22,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.iacovelli.nicola.eatbasta.R;
 import com.iacovelli.nicola.eatbasta.Utility;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    EditText user;
-    EditText pwd;
+    TextInputEditText user;
+    TextInputEditText pwd;
     Button loginBtn;
     TextView recoveryPwdTxt;
     TextView registerTxtBtn;
@@ -59,11 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         darkSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    mainLayout.setBackgroundColor(Color.BLACK);
-                } else {
-                    mainLayout.setBackgroundColor(Color.WHITE);
-                }
+                //TODO: Implementare il cambio di tema
             }
         });
     }

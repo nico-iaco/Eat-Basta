@@ -2,10 +2,6 @@ package com.iacovelli.nicola.eatbasta.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.iacovelli.nicola.eatbasta.R;
@@ -14,6 +10,11 @@ import com.iacovelli.nicola.eatbasta.model.Restaurant;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class RestaurantActivity extends AppCompatActivity {
 
