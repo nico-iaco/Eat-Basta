@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
     tools:context=".activity.RegisterActivity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -24,35 +26,66 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </androidx.appcompat.widget.LinearLayoutCompat>
-    <EditText
-        android:id="@+id/email_register"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-    <EditText
-        android:id="@+id/password_register"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-    <EditText
-        android:id="@+id/verify_password_register"
-        android:hint="@string/verify_password"
-        android:inputType="textPassword"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
 
-    <EditText
-        android:id="@+id/phone_register"
-        android:hint="@string/phone_number"
-        android:inputType="phone"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:hint="@string/email"
+        style="@style/InputTextStyling">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email_register"
+            android:inputType="textEmailAddress"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:hint="@string/password"
+        style="@style/InputTextStyling">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_register"
+            android:inputType="textPassword"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:hint="@string/verify_password"
+        style="@style/InputTextStyling">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/verify_password_register"
+            android:inputType="textPassword"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:hint="@string/phone_number"
+        style="@style/InputTextStyling">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phone_register"
+            android:inputType="phone"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_weight="1"
@@ -64,14 +97,16 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
-        <Button
-            android:id="@+id/register_button_register"
-            android:text="@string/registrati"
+
+        <com.google.android.material.button.MaterialButton
             android:enabled="false"
-            android:background="@drawable/rounded_button"
-            android:layout_weight="1"
+            android:id="@+id/register_button_register"
+            style="@style/PrimaryRoundedButton"
             android:layout_width="0dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/registrati" />
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -7,11 +7,11 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.iacovelli.nicola.eatbasta.R;
@@ -22,10 +22,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText password;
-    EditText verifyPassword;
-    EditText email;
-    EditText phone;
+    TextInputEditText password;
+    TextInputEditText verifyPassword;
+    TextInputEditText email;
+    TextInputEditText phone;
     Button registerBtn;
     private FirebaseAuth mAuth;
     boolean isEmail, isPassword, isPhone;
