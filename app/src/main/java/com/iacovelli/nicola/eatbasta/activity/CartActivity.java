@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.iacovelli.nicola.eatbasta.R;
 import com.iacovelli.nicola.eatbasta.adapter.ProductAdapter;
 import com.iacovelli.nicola.eatbasta.model.Product;
+import com.iacovelli.nicola.eatbasta.model.Restaurant;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class CartActivity extends AppCompatActivity {
     ProgressBar progress;
     TextView totalTxt;
     Button checkoutBtn;
+    Restaurant r;
 
     ArrayList<Product> productList = new ArrayList<>(Arrays.asList(new Product("Iphone", 15.5f), new Product("Mammt", 18.4f)));
 
@@ -40,10 +42,14 @@ public class CartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        Intent i = getIntent();
+        Bundle b = i.getExtras();
+        r = (Restaurant) b.getSerializable("Ristorante");
+        Log.d("Ristorante: ", r.toString());
         recyclerView = findViewById(R.id.product_list);
         progress = findViewById(R.id.checkout_bar);
         progress.setIndeterminate(false);
-        progress.setMax(8);
+        progress.setMax((int) Math.round(r.getMinOrder()));
         progress.setProgress(0);
         totalTxt = findViewById(R.id.total_text);
         checkoutBtn = findViewById(R.id.checkout_button);
@@ -84,19 +90,16 @@ public class CartActivity extends AppCompatActivity {
     @TargetApi(Build.VERSION_CODES.N)
     private void checkProducts() {
         double total = 0;
-        int countProducts = 0;
         for (Product p : productList) {
             total += (p.getProductPrice() * p.getProductQuantity());
-            countProducts += p.getProductQuantity();
         }
-        progress.setProgress(countProducts, true);
+        progress.setProgress((int) Math.round(total), true);
         DecimalFormat df = new DecimalFormat("###.##");
         String totalString = df.format(total);
-        Log.d("Total price", totalString);
         totalTxt.setText(totalString);
-        if (countProducts >= 8 && !checkoutBtn.isEnabled()) {
+        if (total >= r.getMinOrder() && !checkoutBtn.isEnabled()) {
             checkoutBtn.setEnabled(true);
-        } else if (countProducts < 8 && checkoutBtn.isEnabled()) {
+        } else if (total < r.getMinOrder() && checkoutBtn.isEnabled()) {
             checkoutBtn.setEnabled(false);
         }
 
