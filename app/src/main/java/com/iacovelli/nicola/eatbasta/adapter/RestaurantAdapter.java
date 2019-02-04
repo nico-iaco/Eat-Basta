@@ -1,5 +1,6 @@
 package com.iacovelli.nicola.eatbasta.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.iacovelli.nicola.eatbasta.R;
+import com.iacovelli.nicola.eatbasta.activity.CartActivity;
+import com.iacovelli.nicola.eatbasta.activity.RestaurantActivity;
 import com.iacovelli.nicola.eatbasta.model.Restaurant;
 
 import java.util.ArrayList;
@@ -17,11 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder> {
 
     ArrayList<Restaurant> restaurantList;
-    View.OnClickListener clickListener;
 
-    public RestaurantAdapter(ArrayList<Restaurant> restaurantList, View.OnClickListener listener) {
+    public RestaurantAdapter(ArrayList<Restaurant> restaurantList) {
         this.restaurantList = restaurantList;
-        this.clickListener = listener;
     }
 
     @NonNull
@@ -42,7 +43,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         return restaurantList != null ? restaurantList.size() : 0;
     }
 
-    class RestaurantViewHolder extends RecyclerView.ViewHolder {
+    class RestaurantViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final View v;
         private final ImageView restaurantImage;
         private final TextView restaurantName;
@@ -51,7 +52,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         public RestaurantViewHolder(@NonNull View itemView) {
             super(itemView);
             this.v = itemView;
-            v.setOnClickListener(clickListener);
+            v.setOnClickListener(this);
             restaurantImage = v.findViewById(R.id.restaurant_image);
             restaurantName = v.findViewById(R.id.restaurant_name);
             restaurantDescription = v.findViewById(R.id.restaurant_description);
@@ -61,6 +62,12 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
             restaurantImage.setImageResource(r.getImage());
             restaurantName.setText(r.getName());
             restaurantDescription.setText(r.getDescription());
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent i = new Intent(v.getContext(), CartActivity.class);
+            v.getContext().startActivity(i);
         }
     }
 }

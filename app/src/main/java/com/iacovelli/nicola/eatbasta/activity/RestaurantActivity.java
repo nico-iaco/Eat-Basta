@@ -27,18 +27,11 @@ public class RestaurantActivity extends AppCompatActivity {
         restaurantList = findViewById(R.id.restaurant_list);
         ArrayList<Restaurant> restaurantArrayList = new ArrayList<>(Arrays.asList(
                 new Restaurant("Panucci's pizza", "The best pizza ever", R.drawable.logo),
-                new Restaurant("Panucci's pizza", "The best pizza ever", R.drawable.logo),
-                new Restaurant("Panucci's pizza", "The best pizza ever", R.drawable.logo),
-                new Restaurant("Panucci's pizza", "The best pizza ever", R.drawable.logo)
+                new Restaurant("Calabrese", "Mannaia a tia", R.drawable.logo),
+                new Restaurant("Burger king", "Tutti i miei amici vanno a burger king", R.drawable.logo),
+                new Restaurant("Mensa elis", "Ogni giorno surprise", R.drawable.logo)
         ));
-        restaurantList.setAdapter(new RestaurantAdapter(restaurantArrayList, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(RestaurantActivity.this, CartActivity.class);
-                startActivity(i);
-            }
-        }));
-        restaurantList.addItemDecoration(new DividerItemDecoration(restaurantList.getContext(), DividerItemDecoration.VERTICAL));
+        restaurantList.setAdapter(new RestaurantAdapter(restaurantArrayList));
         restaurantList.setLayoutManager(new LinearLayoutManager(this));
     }
 }
