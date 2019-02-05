@@ -16,4 +16,6 @@
     <string name="phone_number">Phone number</string>
     <string name="dark_mode">Dark mode</string>
     <string name="inital_quantity">0.0</string>
+    <string name="view_mode">View mode</string>
+    <string name="checkout">Checkout</string>
 </resources>

@@ -2,12 +2,14 @@ package com.iacovelli.nicola.eatbasta.adapter;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.iacovelli.nicola.eatbasta.R;
 import com.iacovelli.nicola.eatbasta.activity.CartActivity;
 import com.iacovelli.nicola.eatbasta.model.Restaurant;
@@ -19,16 +21,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder> {
 
-    ArrayList<Restaurant> restaurantList;
+    private ArrayList<Restaurant> restaurantList;
+    private boolean isGridMode;
 
     public RestaurantAdapter(ArrayList<Restaurant> restaurantList) {
         this.restaurantList = restaurantList;
+
+    }
+
+    public boolean isGridMode() {
+        return isGridMode;
+    }
+
+    public void setGridMode(boolean gridMode) {
+        isGridMode = gridMode;
     }
 
     @NonNull
     @Override
     public RestaurantViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.restaurant_item, viewGroup, false);
+        int layout = isGridMode ? R.layout.restaurant_item_grid : R.layout.restaurant_item;
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(layout, viewGroup, false);
         return new RestaurantViewHolder(v);
     }
 
@@ -54,19 +67,21 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         public RestaurantViewHolder(@NonNull View itemView) {
             super(itemView);
             this.v = itemView;
-            v.setOnClickListener(this);
             restaurantImage = v.findViewById(R.id.restaurant_image);
             restaurantName = v.findViewById(R.id.restaurant_name);
             restaurantDescription = v.findViewById(R.id.restaurant_description);
             restaurantMinOrder = v.findViewById(R.id.restaurant_min_order);
+            v.setOnClickListener(this);
         }
 
         public void bind(Restaurant r) {
             this.r = r;
-            restaurantImage.setImageResource(r.getImage());
+            Log.d("Immagine: ", String.valueOf(r.getImage()));
             restaurantName.setText(r.getName());
             restaurantDescription.setText(r.getDescription());
             restaurantMinOrder.setText("Ordine minimo: " + String.valueOf(r.getMinOrder()));
+            Glide.with(v).load(r.getImage()).into(restaurantImage);
+            //restaurantImage.setImageResource(r.getImage());
         }
 
         @Override
