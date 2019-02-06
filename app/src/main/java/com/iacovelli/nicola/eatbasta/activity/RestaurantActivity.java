@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.iacovelli.nicola.eatbasta.R;
 import com.iacovelli.nicola.eatbasta.adapter.RestaurantAdapter;
 import com.iacovelli.nicola.eatbasta.model.Restaurant;
@@ -74,7 +75,8 @@ public class RestaurantActivity extends AppCompatActivity {
             setLayoutManager();
             return true;
         }
-        if (item.getItemId() == R.id.login_menu) {
+        if (item.getItemId() == R.id.logout_menu) {
+            FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(this, MainActivity.class));
             return true;
         } else if (item.getItemId() == R.id.checkout_menu) {

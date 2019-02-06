@@ -9,8 +9,8 @@
         android:title="@string/view_mode"
         android:icon="@drawable/baseline_grid_on_24" />
     <item
-        android:id="@+id/login_menu"
-        android:title="@string/login" />
+        android:id="@+id/logout_menu"
+        android:title="@string/logout" />
 
     <item
         android:id="@+id/checkout_menu"

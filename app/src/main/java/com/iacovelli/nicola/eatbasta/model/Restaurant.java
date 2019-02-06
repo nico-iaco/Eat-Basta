@@ -1,11 +1,9 @@
 package com.iacovelli.nicola.eatbasta.model;
 
-import java.io.Serializable;
-
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
-public class Restaurant implements Serializable {
+public class Restaurant {
     private String name;
     private @DrawableRes
     int image;

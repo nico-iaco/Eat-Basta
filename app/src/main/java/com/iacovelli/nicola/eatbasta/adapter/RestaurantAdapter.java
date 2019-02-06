@@ -1,7 +1,6 @@
 package com.iacovelli.nicola.eatbasta.adapter;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,7 +61,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         private final TextView restaurantName;
         private final TextView restaurantDescription;
         private final TextView restaurantMinOrder;
-        private Restaurant r;
 
         public RestaurantViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -75,7 +73,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         }
 
         public void bind(Restaurant r) {
-            this.r = r;
             Log.d("Immagine: ", String.valueOf(r.getImage()));
             restaurantName.setText(r.getName());
             restaurantDescription.setText(r.getDescription());
@@ -87,9 +84,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         @Override
         public void onClick(View v) {
             Intent i = new Intent(v.getContext(), CartActivity.class);
-            Bundle b = new Bundle();
-            b.putSerializable("Ristorante", r);
-            i.putExtras(b);
             v.getContext().startActivity(i);
         }
     }

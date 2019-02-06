@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,7 +16,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.iacovelli.nicola.eatbasta.R;
 import com.iacovelli.nicola.eatbasta.adapter.ProductAdapter;
 import com.iacovelli.nicola.eatbasta.model.Product;
-import com.iacovelli.nicola.eatbasta.model.Restaurant;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -30,11 +28,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class CartActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    ProgressBar progress;
-    TextView totalTxt;
-    Button checkoutBtn;
-    Restaurant r;
+    private RecyclerView recyclerView;
+    private ProgressBar progress;
+    private TextView totalTxt;
+    private Button checkoutBtn;
+    private float minimumOrder = 40.4f;
 
     ArrayList<Product> productList = new ArrayList<>(Arrays.asList(new Product("Iphone", 15.5f), new Product("Mammt", 18.4f)));
 
@@ -42,14 +40,10 @@ public class CartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-        Intent i = getIntent();
-        Bundle b = i.getExtras();
-        r = (Restaurant) b.getSerializable("Ristorante");
-        Log.d("Ristorante: ", r.toString());
         recyclerView = findViewById(R.id.product_list);
         progress = findViewById(R.id.checkout_bar);
         progress.setIndeterminate(false);
-        progress.setMax((int) Math.round(r.getMinOrder()));
+        progress.setMax((int) minimumOrder);
         progress.setProgress(0);
         totalTxt = findViewById(R.id.total_text);
         checkoutBtn = findViewById(R.id.checkout_button);
@@ -97,9 +91,9 @@ public class CartActivity extends AppCompatActivity {
         DecimalFormat df = new DecimalFormat("###.##");
         String totalString = df.format(total);
         totalTxt.setText(totalString);
-        if (total >= r.getMinOrder() && !checkoutBtn.isEnabled()) {
+        if (total >= minimumOrder && !checkoutBtn.isEnabled()) {
             checkoutBtn.setEnabled(true);
-        } else if (total < r.getMinOrder() && checkoutBtn.isEnabled()) {
+        } else if (total < minimumOrder && checkoutBtn.isEnabled()) {
             checkoutBtn.setEnabled(false);
         }
 
