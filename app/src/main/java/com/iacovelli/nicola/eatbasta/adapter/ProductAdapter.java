@@ -10,18 +10,18 @@ import com.iacovelli.nicola.eatbasta.model.Product;
 import com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker;
 import com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPickerListener;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
-    private ArrayList<Product> products;
+    private List<Product> products;
     private View.OnClickListener clickListener;
 
 
-    public ProductAdapter(ArrayList<Product> products, View.OnClickListener clickListener) {
+    public ProductAdapter(List<Product> products, View.OnClickListener clickListener) {
         this.products = products;
         this.clickListener = clickListener;
     }

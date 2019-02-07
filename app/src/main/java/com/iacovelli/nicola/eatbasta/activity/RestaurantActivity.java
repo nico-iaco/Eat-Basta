@@ -3,7 +3,6 @@ package com.iacovelli.nicola.eatbasta.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,12 +10,10 @@ import android.view.MenuItem;
 import com.google.firebase.auth.FirebaseAuth;
 import com.iacovelli.nicola.eatbasta.R;
 import com.iacovelli.nicola.eatbasta.adapter.RestaurantAdapter;
-import com.iacovelli.nicola.eatbasta.model.Restaurant;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.iacovelli.nicola.eatbasta.viewmodel.CustomViewModel;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,31 +24,28 @@ public class RestaurantActivity extends AppCompatActivity {
     RestaurantAdapter adapter;
     RecyclerView.LayoutManager layoutManager;
     SharedPreferences preferences;
+    boolean isActuallyAGrid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant);
         restaurantList = findViewById(R.id.restaurant_list);
-
-        ArrayList<Restaurant> restaurantArrayList = new ArrayList<>(Arrays.asList(
-                new Restaurant("Panucci's pizza", "The best pizza ever", R.drawable.restaurant, 10),
-                new Restaurant("Calabrese", "Mannaia a tia", R.drawable.restaurant, 15),
-                new Restaurant("Burger king", "Tutti i miei amici vanno a burger king", R.drawable.restaurant, 20),
-                new Restaurant("Mensa elis", "Ogni giorno surprise", R.drawable.restaurant, 50)
-        ));
-        adapter = new RestaurantAdapter(restaurantArrayList);
         preferences = getSharedPreferences(getPackageName(), MODE_PRIVATE);
-        Log.d("package: ", getPackageName());
+        isActuallyAGrid = preferences.getBoolean("restaurantGridLayout", false);
+        CustomViewModel model = ViewModelProviders.of(this).get(CustomViewModel.class);
+        model.getRestaurants().observe(this, r -> {
+            adapter = new RestaurantAdapter(r);
+            adapter.setGridMode(isActuallyAGrid);
+            if (adapter.isGridMode()) {
+                layoutManager = new GridLayoutManager(this, 2);
+            } else {
+                layoutManager = new LinearLayoutManager(this);
+            }
+            restaurantList.setAdapter(adapter);
+            restaurantList.setLayoutManager(layoutManager);
+        });
 
-        adapter.setGridMode(preferences.getBoolean("restaurantGridLayout", false));
-        if (adapter.isGridMode()) {
-            layoutManager = new GridLayoutManager(this, 2);
-        } else {
-            layoutManager = new LinearLayoutManager(this);
-        }
-        restaurantList.setAdapter(adapter);
-        restaurantList.setLayoutManager(layoutManager);
     }
 
     @Override

@@ -13,17 +13,17 @@ import com.iacovelli.nicola.eatbasta.R;
 import com.iacovelli.nicola.eatbasta.activity.CartActivity;
 import com.iacovelli.nicola.eatbasta.model.Restaurant;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder> {
 
-    private ArrayList<Restaurant> restaurantList;
+    private List<Restaurant> restaurantList;
     private boolean isGridMode;
 
-    public RestaurantAdapter(ArrayList<Restaurant> restaurantList) {
+    public RestaurantAdapter(List<Restaurant> restaurantList) {
         this.restaurantList = restaurantList;
 
     }
