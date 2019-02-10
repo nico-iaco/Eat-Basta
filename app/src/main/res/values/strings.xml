@@ -18,4 +18,6 @@
     <string name="inital_quantity">0.0</string>
     <string name="view_mode">View mode</string>
     <string name="checkout">Checkout</string>
+    <string name="testo_prova">Testo prova</string>
+    <string name="min_order">Min order:</string>
 </resources>

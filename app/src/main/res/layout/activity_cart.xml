@@ -1,58 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:weightSum="15"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="10dp"
     tools:context=".activity.CartActivity">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/info_restaurant_layout"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:background="@drawable/border_layout"
+        android:layout_height="150dp"
+        android:weightSum="5"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/restaurant_image_cart"
+            android:src="@drawable/restaurant"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:weightSum="2"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/restaurant_name_cart"
+                android:text="@string/testo_prova"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/restaurant_description_cart"
+                android:text="@string/testo_prova"
+                android:textStyle="italic"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/product_list"
         android:paddingStart="5dp"
-        android:layout_weight="13"
+        android:layout_below="@+id/info_restaurant_layout"
+        android:layout_above="@+id/bottom_layout"
         android:layout_width="match_parent"
-        android:layout_height="0dp" />
-
-    <ProgressBar
-        android:id="@+id/checkout_bar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp" />
+        android:layout_height="wrap_content" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_weight="1"
-        android:weightSum="5"
+        android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
-        <TextView
-            android:layout_gravity="center"
-            android:text="@string/tot"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/total_text"
-            android:text="@string/inital_quantity"
-            android:layout_gravity="center"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
+        android:orientation="vertical"
+        android:background="@drawable/rounded_linear_layout"
+        android:paddingTop="16dp"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tot"
+                android:layout_marginStart="32dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tot" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/total_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/tot"
+                android:layout_marginEnd="-32dp"
+                android:text="@string/inital_quantity" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/min"
+                android:text="@string/min_order"
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="80dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/restaurant_min_order_cart"
+                android:layout_alignEnd="@+id/min"
+                android:layout_marginEnd="-32dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/checkout_bar"
+            android:progressDrawable="@drawable/rounded_progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <Button
             android:id="@+id/checkout_button"
             android:text="@string/ordina"
             android:enabled="false"
-            android:layout_gravity="center"
-            android:background="@drawable/rounded_button"
-            android:layout_width="0dp"
-            android:layout_weight="2"
+            android:layout_marginBottom="0dp"
+            android:backgroundTint="@color/colorAccent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </androidx.appcompat.widget.LinearLayoutCompat>
-</androidx.appcompat.widget.LinearLayoutCompat>
+</RelativeLayout>
