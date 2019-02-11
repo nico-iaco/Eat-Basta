@@ -15,3 +15,4 @@ The **features** of this app are:
  - **SharedPreferences** to save the preferences of the users
  - **RecyclerView** for the lists of restaurant and menu
  - **Firebase** to authenticate the user and register new users
+ - **Room** for data persistence
