@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:weightSum="5"
     android:layout_width="match_parent"
     android:layout_height="70dp">
@@ -21,12 +20,38 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent" />
 
-    <com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:text="+"
+            android:id="@+id/increase_quantity"
+            android:layout_width="64dp"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/product_quantity"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textAlignment="center"
+            android:layout_toEndOf="@id/increase_quantity"
+            android:text="5" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/decrease_quantity"
+            android:text="-"
+            android:layout_toEndOf="@+id/product_quantity"
+            android:layout_centerVertical="true"
+            android:layout_width="64dp"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <!--<com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker
         android:id="@+id/product_quantity"
         app:snp_maxValue="100"
         app:snp_minValue="0"
@@ -34,8 +59,8 @@
         app:snp_updateInterval="1"
         app:snp_value="0"
         android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent" />
+
+        android:layout_height="match_parent" />-->
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>

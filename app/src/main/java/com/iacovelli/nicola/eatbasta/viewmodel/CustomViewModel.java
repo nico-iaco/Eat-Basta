@@ -1,19 +1,28 @@
 package com.iacovelli.nicola.eatbasta.viewmodel;
 
+import android.app.Application;
+
 import com.iacovelli.nicola.eatbasta.R;
 import com.iacovelli.nicola.eatbasta.model.Product;
 import com.iacovelli.nicola.eatbasta.model.Restaurant;
+import com.iacovelli.nicola.eatbasta.repo.AppRepo;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-public class CustomViewModel extends ViewModel {
+public class CustomViewModel extends AndroidViewModel {
+    private AppRepo repo;
     private MutableLiveData<List<Restaurant>> restaurants;
-    private MutableLiveData<List<Product>> products;
+    private LiveData<List<Product>> products;
+
+    public CustomViewModel(Application application) {
+        super(application);
+        repo = new AppRepo(application);
+    }
 
     public synchronized LiveData<List<Restaurant>> getRestaurants() {
         if (restaurants == null) {
@@ -41,13 +50,10 @@ public class CustomViewModel extends ViewModel {
     }
 
     private void loadProducts() {
-        List<Product> productList = new ArrayList<>();
-        productList.add(new Product("Iphone", 15.5f));
-        productList.add(new Product("Mammt", 18.4f));
-        productList.add(new Product("Onion", 1));
-        productList.add(new Product("Lucidamario", 6.2f));
-        productList.add(new Product("Mela", 0.4f));
-        productList.add(new Product("Pera", 1.4f));
-        products.setValue(productList);
+        products = repo.getAllProducts();
+    }
+
+    public void updateProduct(int id, int qt) {
+        repo.update(id, qt);
     }
 }

@@ -35,6 +35,7 @@ public class CartActivity extends AppCompatActivity {
     private TextView minOrderTxt;
     private Button checkoutBtn;
     private float minimumOrder = 40.4f;
+    private ProductAdapter adapter = new ProductAdapter(null, null);
 
 
     @Override
@@ -50,14 +51,16 @@ public class CartActivity extends AppCompatActivity {
         minOrderTxt = findViewById(R.id.restaurant_min_order_cart);
         minOrderTxt.setText(String.valueOf(minimumOrder));
         checkoutBtn = findViewById(R.id.checkout_button);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
         CustomViewModel model = ViewModelProviders.of(this).get(CustomViewModel.class);
         model.getProducts().observe(this, p -> {
-            ProductAdapter productAdapter = new ProductAdapter(p, v -> checkProducts(p));
-            recyclerView.setAdapter(productAdapter);
-            recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            adapter.setProducts(p);
+            adapter.setChangeListener(model::updateProduct);
+            checkProducts(p);
+            recyclerView.setAdapter(adapter);
         });
-
 
     }
 
@@ -87,8 +90,6 @@ public class CartActivity extends AppCompatActivity {
     private void checkProducts(List<Product> productList) {
         double total = 0;
         Log.d("Dimensione: ", String.valueOf(productList.size()));
-        //productList.removeIf(p -> p.getProductQuantity()==0);
-        //Log.d("Dimensione: ", String.valueOf(productList.size()));
         for (Product p : productList) {
             total += (p.getProductPrice() * p.getProductQuantity());
         }

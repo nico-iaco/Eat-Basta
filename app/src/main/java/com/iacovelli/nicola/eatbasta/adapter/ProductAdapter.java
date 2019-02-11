@@ -3,12 +3,12 @@ package com.iacovelli.nicola.eatbasta.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.iacovelli.nicola.eatbasta.OnQuantityChangeListener;
 import com.iacovelli.nicola.eatbasta.R;
 import com.iacovelli.nicola.eatbasta.model.Product;
-import com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker;
-import com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPickerListener;
 
 import java.util.List;
 
@@ -18,12 +18,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
     private List<Product> products;
-    private View.OnClickListener clickListener;
+    private OnQuantityChangeListener changeListener;
 
 
-    public ProductAdapter(List<Product> products, View.OnClickListener clickListener) {
+    public ProductAdapter(List<Product> products, OnQuantityChangeListener clickListener) {
         this.products = products;
-        this.clickListener = clickListener;
+        this.changeListener = clickListener;
+    }
+
+    public void setChangeListener(OnQuantityChangeListener changeListener) {
+        this.changeListener = changeListener;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -50,11 +59,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         }
     }
 
-    public class ProductViewHolder extends RecyclerView.ViewHolder implements ScrollableNumberPickerListener {
+    public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final View view;
         private final TextView productName;
         private final TextView productPrice;
-        private final ScrollableNumberPicker productQuantity;
+        private final Button increase;
+        private final Button decrease;
+        private final TextView productQuantity;
         private Product p;
 
         public ProductViewHolder(View view) {
@@ -63,20 +74,37 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             productName = view.findViewById(R.id.product_name);
             productPrice = view.findViewById(R.id.product_price);
             productQuantity = view.findViewById(R.id.product_quantity);
-            productQuantity.setListener(this);
+            increase = view.findViewById(R.id.increase_quantity);
+            decrease = view.findViewById(R.id.decrease_quantity);
+            increase.setOnClickListener(this);
+            decrease.setOnClickListener(this);
         }
 
         public void bind(Product p) {
             this.p = p;
             productName.setText(p.getProductName());
             productPrice.setText(String.valueOf(p.getProductPrice()));
-            productQuantity.setValue(p.getProductQuantity());
+            productQuantity.setText(String.valueOf(p.getProductQuantity()));
         }
 
         @Override
-        public void onNumberPicked(int value) {
-            p.setProductQuantity(value);
-            clickListener.onClick(view);
+        public void onClick(View v) {
+            int value = p.getProductQuantity();
+            switch (v.getId()) {
+                case R.id.increase_quantity:
+                    value++;
+                    break;
+                case R.id.decrease_quantity:
+                    int tmp = value - 1;
+                    if (tmp >= 0) {
+                        value = tmp;
+                    }
+                    break;
+            }
+            changeListener.onQuantityChange(p.getId(), value);
+
         }
+
+
     }
 }
