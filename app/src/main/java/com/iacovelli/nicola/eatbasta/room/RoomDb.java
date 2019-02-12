@@ -3,7 +3,9 @@ package com.iacovelli.nicola.eatbasta.room;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.iacovelli.nicola.eatbasta.dao.CartDao;
 import com.iacovelli.nicola.eatbasta.dao.ProductDao;
+import com.iacovelli.nicola.eatbasta.model.Cart;
 import com.iacovelli.nicola.eatbasta.model.Product;
 
 import androidx.annotation.NonNull;
@@ -12,10 +14,12 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {Product.class}, version = 1)
+@Database(entities = {Product.class, Cart.class}, version = 1)
 public abstract class RoomDb extends RoomDatabase {
 
     public abstract ProductDao productDao();
+
+    public abstract CartDao cartDao();
 
     private static volatile RoomDb instance;
 

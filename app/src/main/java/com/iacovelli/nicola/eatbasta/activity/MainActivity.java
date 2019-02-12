@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
+                                    // Sign in success, updateProductQuantity UI with the signed-in user's information
                                     Log.d("Login", "signInWithEmail:success");
                                     Intent intent = new Intent(MainActivity.this, RestaurantActivity.class);
                                     startActivity(intent);

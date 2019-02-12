@@ -4,10 +4,10 @@ import android.os.AsyncTask;
 
 import com.iacovelli.nicola.eatbasta.dao.ProductDao;
 
-public class UpdateTask extends AsyncTask<Integer, Void, Void> {
+public class UpdateProductTask extends AsyncTask<Integer, Void, Void> {
     private ProductDao taskDao;
 
-    public UpdateTask(ProductDao productDao) {
+    public UpdateProductTask(ProductDao productDao) {
         taskDao = productDao;
     }
 

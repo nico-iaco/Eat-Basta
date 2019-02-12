@@ -60,7 +60,7 @@
         android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/rounded_linear_layout"
+        android:background="@drawable/rounded_top_linear_layout"
         android:paddingTop="16dp"
         android:paddingRight="8dp"
         android:paddingLeft="8dp"

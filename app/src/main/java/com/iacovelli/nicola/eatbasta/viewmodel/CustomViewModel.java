@@ -3,6 +3,7 @@ package com.iacovelli.nicola.eatbasta.viewmodel;
 import android.app.Application;
 
 import com.iacovelli.nicola.eatbasta.R;
+import com.iacovelli.nicola.eatbasta.model.Cart;
 import com.iacovelli.nicola.eatbasta.model.Product;
 import com.iacovelli.nicola.eatbasta.model.Restaurant;
 import com.iacovelli.nicola.eatbasta.repo.AppRepo;
@@ -18,6 +19,7 @@ public class CustomViewModel extends AndroidViewModel {
     private AppRepo repo;
     private MutableLiveData<List<Restaurant>> restaurants;
     private LiveData<List<Product>> products;
+    private LiveData<List<Cart>> cart;
 
     public CustomViewModel(Application application) {
         super(application);
@@ -40,6 +42,14 @@ public class CustomViewModel extends AndroidViewModel {
         return products;
     }
 
+    public synchronized LiveData<List<Cart>> getCart() {
+        if (cart == null) {
+            cart = new MutableLiveData<>();
+            loadCart();
+        }
+        return cart;
+    }
+
     private void loadRestaurants() {
         List<Restaurant> restaurantArrayList = new ArrayList<>();
         restaurantArrayList.add(new Restaurant("Panucci's pizza", "The best pizza ever", R.drawable.restaurant, 10));
@@ -54,6 +64,18 @@ public class CustomViewModel extends AndroidViewModel {
     }
 
     public void updateProduct(int id, int qt) {
-        repo.update(id, qt);
+        repo.updateProductQuantity(id, qt);
+    }
+
+    private void loadCart() {
+        cart = repo.getAllCart();
+    }
+
+    public void insertProductIntoCart(Product p) {
+        repo.insertProductIntoCart(p);
+    }
+
+    public void removeProductFromCart(int id) {
+        repo.removeProductFromCart(id);
     }
 }

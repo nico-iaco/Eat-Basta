@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.CheckoutActivity">
+
+    <RelativeLayout
+        android:id="@+id/upper_layout_checkout"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_bottom_linear_layout"
+        android:paddingBottom="12dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/summary_txt"
+            android:text="@string/riepilogo_ordine"
+            android:textSize="18sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:textStyle="bold"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/restaurant_name_checkout"
+            android:text="@string/testo_prova"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:layout_marginStart="16dp"
+            android:layout_below="@+id/summary_txt"
+            android:layout_marginTop="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/restaurant_address_checkout"
+            android:textStyle="bold|italic"
+            android:textSize="16sp"
+            android:layout_below="@+id/restaurant_name_checkout"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/testo_prova"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/checkout_list"
+        android:layout_below="@+id/upper_layout_checkout"
+        android:layout_above="@+id/bottom_layout_checkout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:id="@+id/bottom_layout_checkout"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/rounded_top_linear_layout"
+        android:paddingTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tot_txt"
+            android:text="@string/tot"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginStart="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/total_checkout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/pay_checkout"
+            android:layout_alignTop="@+id/tot_txt"
+            android:layout_marginTop="2dp"
+            android:layout_toEndOf="@+id/tot_txt"
+            android:text="1.0" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/pay_checkout"
+            android:layout_alignTop="@+id/tot_txt"
+            android:layout_marginTop="2dp"
+            android:layout_toEndOf="@+id/total_checkout"
+            android:text="@string/money_value" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pay_checkout"
+            android:layout_below="@+id/tot_txt"
+            android:text="@string/pay"
+            android:textAlignment="center"
+            style="@style/ButtonWithoutMargin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</RelativeLayout>

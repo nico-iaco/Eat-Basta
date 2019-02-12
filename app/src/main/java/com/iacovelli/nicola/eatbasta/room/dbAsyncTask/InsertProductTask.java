@@ -5,10 +5,10 @@ import android.os.AsyncTask;
 import com.iacovelli.nicola.eatbasta.dao.ProductDao;
 import com.iacovelli.nicola.eatbasta.model.Product;
 
-public class InsertTask extends AsyncTask<Product, Void, Void> {
+public class InsertProductTask extends AsyncTask<Product, Void, Void> {
     private ProductDao taskDao;
 
-    public InsertTask(ProductDao productDao) {
+    public InsertProductTask(ProductDao productDao) {
         taskDao = productDao;
     }
 

@@ -20,4 +20,7 @@
     <string name="checkout">Checkout</string>
     <string name="testo_prova">Prova</string>
     <string name="min_order">Min order:</string>
+    <string name="riepilogo_ordine">Riepilogo ordine</string>
+    <string name="pay">PAY</string>
+    <string name="money_value">€</string>
 </resources>

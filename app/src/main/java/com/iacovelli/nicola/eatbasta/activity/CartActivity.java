@@ -51,15 +51,26 @@ public class CartActivity extends AppCompatActivity {
         minOrderTxt = findViewById(R.id.restaurant_min_order_cart);
         minOrderTxt.setText(String.valueOf(minimumOrder));
         checkoutBtn = findViewById(R.id.checkout_button);
-
+        CustomViewModel model = ViewModelProviders.of(this).get(CustomViewModel.class);
+        checkoutBtn.setOnClickListener(v -> {
+            List<Product> list = adapter.getProducts();
+            for (Product p : list) {
+                if (p.getProductQuantity() != 0) {
+                    model.insertProductIntoCart(p);
+                }
+            }
+            Intent i = new Intent(CartActivity.this, CheckoutActivity.class);
+            startActivity(i);
+        });
+        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
-        CustomViewModel model = ViewModelProviders.of(this).get(CustomViewModel.class);
+
         model.getProducts().observe(this, p -> {
             adapter.setProducts(p);
             adapter.setChangeListener(model::updateProduct);
             checkProducts(p);
-            recyclerView.setAdapter(adapter);
+
         });
 
     }
@@ -88,6 +99,7 @@ public class CartActivity extends AppCompatActivity {
 
     @TargetApi(Build.VERSION_CODES.N)
     private void checkProducts(List<Product> productList) {
+        //TODO: Ottimizzare la funzione
         double total = 0;
         Log.d("Dimensione: ", String.valueOf(productList.size()));
         for (Product p : productList) {
