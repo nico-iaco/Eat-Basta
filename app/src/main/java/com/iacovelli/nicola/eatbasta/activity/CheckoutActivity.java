@@ -1,5 +1,6 @@
 package com.iacovelli.nicola.eatbasta.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,15 +18,21 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CheckoutActivity extends AppCompatActivity {
 
     RecyclerView cartList;
+    TextView restaurantName;
+    TextView restaurantAddress;
     TextView totalCheckout;
     Button payButton;
     CustomViewModel model;
+    double minOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
+        Intent input = getIntent();
         cartList = findViewById(R.id.checkout_list);
+        restaurantName = findViewById(R.id.restaurant_name_checkout);
+        restaurantAddress = findViewById(R.id.restaurant_address_checkout);
         totalCheckout = findViewById(R.id.total_checkout);
         payButton = findViewById(R.id.pay_checkout);
         cartList.setLayoutManager(new LinearLayoutManager(this));
@@ -33,6 +40,11 @@ public class CheckoutActivity extends AppCompatActivity {
         CartAdapter adapter = new CartAdapter(null);
         adapter.setListener(model::removeProductFromCart);
         cartList.setAdapter(adapter);
+        if (input != null) {
+            restaurantName.setText(input.getStringExtra("restaurant_name"));
+            restaurantAddress.setText(input.getStringExtra("restaurant_address"));
+            minOrder = input.getDoubleExtra("min_order", 0);
+        }
         model.getCart().observe(this, (carts -> {
             adapter.setData(carts);
             float tot = 0;
@@ -40,10 +52,11 @@ public class CheckoutActivity extends AppCompatActivity {
                 tot += (c.getProduct().getProductQuantity() * c.getProduct().getProductPrice());
             }
             totalCheckout.setText(String.valueOf(tot));
-            if (tot < 40.5 && payButton.isEnabled()) {
+            if (tot < minOrder && payButton.isEnabled()) {
                 payButton.setEnabled(false);
             }
         }));
+
     }
 
     @Override

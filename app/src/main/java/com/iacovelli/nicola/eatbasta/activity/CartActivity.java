@@ -82,6 +82,9 @@ public class CartActivity extends AppCompatActivity {
                 }
             }
             Intent i = new Intent(CartActivity.this, CheckoutActivity.class);
+            i.putExtra("restaurant_name", restaurantName.getText().toString());
+            i.putExtra("restaurant_address", restaurantAddress.getText().toString());
+            i.putExtra("min_order", minimumOrder);
             startActivity(i);
         });
         recyclerView.setAdapter(adapter);
