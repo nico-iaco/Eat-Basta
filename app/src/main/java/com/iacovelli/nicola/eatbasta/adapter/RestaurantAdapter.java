@@ -82,6 +82,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         @Override
         public void onClick(View v) {
             Intent i = new Intent(v.getContext(), CartActivity.class);
+            i.putExtra("restaurant_index", getAdapterPosition());
             v.getContext().startActivity(i);
         }
     }

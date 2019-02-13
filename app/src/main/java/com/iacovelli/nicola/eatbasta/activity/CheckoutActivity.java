@@ -19,6 +19,7 @@ public class CheckoutActivity extends AppCompatActivity {
     RecyclerView cartList;
     TextView totalCheckout;
     Button payButton;
+    CustomViewModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class CheckoutActivity extends AppCompatActivity {
         totalCheckout = findViewById(R.id.total_checkout);
         payButton = findViewById(R.id.pay_checkout);
         cartList.setLayoutManager(new LinearLayoutManager(this));
-        CustomViewModel model = ViewModelProviders.of(this).get(CustomViewModel.class);
+        model = ViewModelProviders.of(this).get(CustomViewModel.class);
         CartAdapter adapter = new CartAdapter(null);
         adapter.setListener(model::removeProductFromCart);
         cartList.setAdapter(adapter);
@@ -43,6 +44,7 @@ public class CheckoutActivity extends AppCompatActivity {
                 payButton.setEnabled(false);
             }
         }));
+
 
     }
 }

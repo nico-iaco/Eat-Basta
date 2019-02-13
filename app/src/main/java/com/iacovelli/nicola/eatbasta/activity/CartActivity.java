@@ -9,13 +9,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.iacovelli.nicola.eatbasta.R;
 import com.iacovelli.nicola.eatbasta.adapter.ProductAdapter;
 import com.iacovelli.nicola.eatbasta.model.Product;
+import com.iacovelli.nicola.eatbasta.model.Restaurant;
 import com.iacovelli.nicola.eatbasta.viewmodel.CustomViewModel;
 
 import java.text.DecimalFormat;
@@ -30,11 +33,14 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CartActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    private ImageView restaurantImage;
+    private TextView restaurantName;
+    private TextView restaurantAddress;
     private ProgressBar progress;
     private TextView totalTxt;
     private TextView minOrderTxt;
     private Button checkoutBtn;
-    private float minimumOrder = 40.4f;
+    private double minimumOrder = 40.4;
     private ProductAdapter adapter = new ProductAdapter(null, null);
 
 
@@ -42,16 +48,32 @@ public class CartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        Intent input = getIntent();
+        CustomViewModel model = ViewModelProviders.of(this).get(CustomViewModel.class);
         recyclerView = findViewById(R.id.product_list);
+        restaurantImage = findViewById(R.id.restaurant_image_cart);
+        restaurantName = findViewById(R.id.restaurant_name_cart);
+        restaurantAddress = findViewById(R.id.restaurant_description_cart);
         progress = findViewById(R.id.checkout_bar);
         progress.setIndeterminate(false);
-        progress.setMax((int) (minimumOrder * 100));
         progress.setProgress(0);
         totalTxt = findViewById(R.id.total_text);
         minOrderTxt = findViewById(R.id.restaurant_min_order_cart);
-        minOrderTxt.setText(String.valueOf(minimumOrder));
+        if (input != null) {
+            int indexRestaurant = input.getIntExtra("restaurant_index", 0);
+            model.getRestaurants().observe(this, restaurants -> {
+                Restaurant r = restaurants.get(indexRestaurant);
+                Glide.with(this).load(r.getUrlImage()).into(restaurantImage);
+                restaurantName.setText(r.getName());
+                restaurantAddress.setText(r.getAddress());
+                minimumOrder = r.getMinOrder();
+                minOrderTxt.setText(String.valueOf(minimumOrder));
+                progress.setMax((int) (minimumOrder * 100));
+            });
+
+        }
         checkoutBtn = findViewById(R.id.checkout_button);
-        CustomViewModel model = ViewModelProviders.of(this).get(CustomViewModel.class);
+
         checkoutBtn.setOnClickListener(v -> {
             List<Product> list = adapter.getProducts();
             for (Product p : list) {
