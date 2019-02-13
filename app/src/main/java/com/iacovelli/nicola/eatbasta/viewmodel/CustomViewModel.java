@@ -84,4 +84,8 @@ public class CustomViewModel extends AndroidViewModel {
     public void removeProductFromCart(int id) {
         repo.removeProductFromCart(id);
     }
+
+    public void clearCart() {
+        repo.clearCart();
+    }
 }

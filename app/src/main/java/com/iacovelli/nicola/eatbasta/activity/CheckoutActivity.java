@@ -44,7 +44,11 @@ public class CheckoutActivity extends AppCompatActivity {
                 payButton.setEnabled(false);
             }
         }));
+    }
 
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        model.clearCart();
     }
 }

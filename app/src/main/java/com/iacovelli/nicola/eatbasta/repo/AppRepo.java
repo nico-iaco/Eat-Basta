@@ -55,5 +55,9 @@ public class AppRepo {
         new CartAsyncTask(cartDao, OperationType.DELETE, id).execute();
     }
 
+    public void clearCart() {
+        new CartAsyncTask(cartDao, OperationType.DELETEALL).execute();
+    }
+
 
 }
