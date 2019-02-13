@@ -1,4 +1,4 @@
-package com.iacovelli.nicola.eatbasta;
+package com.iacovelli.nicola.eatbasta.utility;
 
 import android.util.Patterns;
 

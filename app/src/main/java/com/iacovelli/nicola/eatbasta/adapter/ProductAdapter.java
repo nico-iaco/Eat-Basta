@@ -6,9 +6,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.iacovelli.nicola.eatbasta.OnQuantityChangeListener;
 import com.iacovelli.nicola.eatbasta.R;
 import com.iacovelli.nicola.eatbasta.model.Product;
+import com.iacovelli.nicola.eatbasta.utility.OnQuantityChangeListener;
 
 import java.util.List;
 

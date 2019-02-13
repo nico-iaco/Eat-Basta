@@ -5,7 +5,7 @@ of a food delivery app.
 The **features** of this app are:
  - The possibility to login or register with firebase authentication
  - The possibility to reset credential
- - An activity with the restaurants list(composed by image,name,description and minimum order) and the 
+ - An activity with the restaurants list(composed by image,name,address and minimum order) and the 
  possibility to choose to view the items in a linear way or in a grid way
  - An activity with the list of the menu in that restaurant and the possibility to order food
 

@@ -1,19 +1,17 @@
 package com.iacovelli.nicola.eatbasta.model;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
 public class Restaurant {
     private String name;
-    private @DrawableRes
-    int image;
-    private String description;
+    private String urlImage;
+    private String address;
     private double minOrder;
 
-    public Restaurant(String name, String description, @DrawableRes int image, double minOrder) {
+    public Restaurant(String name, String address, String url, double minOrder) {
         this.name = name;
-        this.description = description;
-        this.image = image;
+        this.address = address;
+        this.urlImage = url;
         this.minOrder = minOrder;
     }
 
@@ -25,21 +23,13 @@ public class Restaurant {
         this.name = name;
     }
 
-    public @DrawableRes
-    int getImage() {
-        return image;
+
+    public String getAddress() {
+        return address;
     }
 
-    public void setImage(@DrawableRes int image) {
-        this.image = image;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public double getMinOrder() {
@@ -53,6 +43,14 @@ public class Restaurant {
     @NonNull
     @Override
     public String toString() {
-        return "Nome: " + name + "||Descrizione: " + description + "||Ordine minimo: " + minOrder;
+        return "Nome: " + name + "||Descrizione: " + address + "||Ordine minimo: " + minOrder;
+    }
+
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
     }
 }

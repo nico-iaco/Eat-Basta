@@ -20,7 +20,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.iacovelli.nicola.eatbasta.R;
-import com.iacovelli.nicola.eatbasta.Utility;
+import com.iacovelli.nicola.eatbasta.utility.Utility;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

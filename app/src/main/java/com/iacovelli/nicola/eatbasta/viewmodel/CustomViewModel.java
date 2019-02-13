@@ -1,14 +1,18 @@
 package com.iacovelli.nicola.eatbasta.viewmodel;
 
 import android.app.Application;
+import android.util.Log;
 
-import com.iacovelli.nicola.eatbasta.R;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.iacovelli.nicola.eatbasta.model.Cart;
 import com.iacovelli.nicola.eatbasta.model.Product;
 import com.iacovelli.nicola.eatbasta.model.Restaurant;
 import com.iacovelli.nicola.eatbasta.repo.AppRepo;
+import com.iacovelli.nicola.eatbasta.utility.JsonParserUtility;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.lifecycle.AndroidViewModel;
@@ -20,6 +24,7 @@ public class CustomViewModel extends AndroidViewModel {
     private MutableLiveData<List<Restaurant>> restaurants;
     private LiveData<List<Product>> products;
     private LiveData<List<Cart>> cart;
+    private String baseUrl = "http://5ba19290ee710f0014dd764c.mockapi.io/api/v1/";
 
     public CustomViewModel(Application application) {
         super(application);
@@ -51,12 +56,13 @@ public class CustomViewModel extends AndroidViewModel {
     }
 
     private void loadRestaurants() {
-        List<Restaurant> restaurantArrayList = new ArrayList<>();
-        restaurantArrayList.add(new Restaurant("Panucci's pizza", "The best pizza ever", R.drawable.restaurant, 10));
-        restaurantArrayList.add(new Restaurant("Calabrese", "Mannaia a tia", R.drawable.restaurant, 15));
-        restaurantArrayList.add(new Restaurant("Burger king", "Tutti i miei amici vanno a burger king", R.drawable.restaurant, 20));
-        restaurantArrayList.add(new Restaurant("Mensa elis", "Ogni giorno surprise", R.drawable.restaurant, 50));
-        restaurants.setValue(restaurantArrayList);
+        RequestQueue queue = Volley.newRequestQueue(getApplication().getApplicationContext());
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, baseUrl + "restaurant", response -> {
+            restaurants.setValue(JsonParserUtility.jsonToRestaurantList(response));
+        }, error -> Log.d("Response: ", error.toString()));
+
+        queue.add(stringRequest);
     }
 
     private void loadProducts() {

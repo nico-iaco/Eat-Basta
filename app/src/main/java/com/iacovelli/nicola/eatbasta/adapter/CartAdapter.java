@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.iacovelli.nicola.eatbasta.OnProductRemovedFromCartListener;
 import com.iacovelli.nicola.eatbasta.R;
 import com.iacovelli.nicola.eatbasta.model.Cart;
+import com.iacovelli.nicola.eatbasta.utility.OnProductRemovedFromCartListener;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package com.iacovelli.nicola.eatbasta.adapter;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,11 +72,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         }
 
         public void bind(Restaurant r) {
-            Log.d("Immagine: ", String.valueOf(r.getImage()));
             restaurantName.setText(r.getName());
-            restaurantDescription.setText(r.getDescription());
+            restaurantDescription.setText(r.getAddress());
             restaurantMinOrder.setText("Ordine minimo: " + String.valueOf(r.getMinOrder()));
-            Glide.with(v).load(r.getImage()).into(restaurantImage);
+            Glide.with(v).load(r.getUrlImage()).into(restaurantImage);
             //restaurantImage.setImageResource(r.getImage());
         }
 
