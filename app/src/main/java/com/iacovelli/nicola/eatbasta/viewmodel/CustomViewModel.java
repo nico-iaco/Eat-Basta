@@ -24,7 +24,7 @@ public class CustomViewModel extends AndroidViewModel {
     private MutableLiveData<List<Restaurant>> restaurants;
     private LiveData<List<Product>> products;
     private LiveData<List<Cart>> cart;
-    private String baseUrl = "http://5ba19290ee710f0014dd764c.mockapi.io/api/v1/";
+    private String baseUrl = "https://api-eat-basta.herokuapp.com/";
 
     public CustomViewModel(Application application) {
         super(application);
@@ -58,7 +58,7 @@ public class CustomViewModel extends AndroidViewModel {
     private void loadRestaurants() {
         RequestQueue queue = Volley.newRequestQueue(getApplication().getApplicationContext());
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, baseUrl + "restaurant", response -> {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, baseUrl + "restaurants", response -> {
             restaurants.setValue(JsonParserUtility.jsonToRestaurantList(response));
         }, error -> Log.d("Response: ", error.toString()));
 
