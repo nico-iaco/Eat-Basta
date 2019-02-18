@@ -16,3 +16,4 @@ The **features** of this app are:
  - **RecyclerView** for the lists of restaurant and menu
  - **Firebase** to authenticate the user and register new users
  - **Room** for data persistence
+ - **Volley** for remote Api request
